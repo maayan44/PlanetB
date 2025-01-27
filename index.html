@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <video autoplay muted loop id="background-video">
+        <source src="irivid.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="landing">
+        <div class="quote-container" onclick="navigate()">
+            <h1>
+                " In order to understand the world,<br>
+                &nbsp;&nbsp;&nbsp;one has to turn away from it,<br>
+                &nbsp;&nbsp;&nbsp;turn inward, and learn to see oneself "
+            </h1>
+        </div>
+        <div class="sub-title">
+            Søren Kierkegaard
+        </div>
+    </div>  
+
+    <audio id="background-audio" autoplay>
+        <source src="tim-awakening.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        const audio = document.getElementById("background-audio");
+
+        if (!sessionStorage.getItem("audioPlayed")) {
+            sessionStorage.setItem("audioPlayed", "true");
+        } else {
+            audio.volume = 0;
+        }
+
+        audio.volume = 0.64;
+
+        function navigate() {
+            window.location.href = 'mainpage.html';
+        }
+
+        audio.onended = function() {
+            audio.pause();
+            audio.currentTime = 0;
+        };
+    </script>
+</body>
+</html>

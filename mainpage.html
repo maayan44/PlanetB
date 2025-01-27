@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planet B</title>
+    <link rel="stylesheet" href="mainpage.css">
+</head>
+<body>
+
+    <video autoplay muted loop id="background-video">
+        <source src="irivid.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Hidden iframe to load audio controls -->
+    <iframe id="audio-iframe" src="audio.html" style="display: none;"></iframe>
+
+    <div class="frame">
+        <div class="main-sector">
+            <img src="logo.png" alt="Planet B Logo" class="logo">
+        </div>
+        <div class="sector events">
+            <a href="events.html">EVENTS</a>
+        </div>
+        <div class="sector community">
+            <a href="community.html">COMMUNITY</a>
+        </div>
+        <div class="down">
+            <a href="https://www.instagram.com/moon___fam" class="instagram" target="_blank">
+                <img src="ig.png" alt="Instagram">
+            </a>            
+            <a href="https://open.spotify.com/playlist/1XCcABmDgc9cWnk5W6VzYW" class="spotify" target="_blank">
+                <img src="spotify.png" alt="Spotify">
+            </a> 
+            <a href="contact.html" class="contact">
+                <img src="mail.png" alt="Contact">
+            </a>         
+            <!-- Mute button for controlling the audio -->
+            <a href="#" class="mute" id="mute-button">
+                <img id="sound-icon" src="soundon.png" alt="Sound On">
+            </a>           
+        </div>
+    </div>
+
+    <div id="hover-text"></div>
+
+    <script>
+        // Get the audio iframe and the mute button
+        const muteButton = document.getElementById("mute-button");
+        const soundIcon = document.getElementById("sound-icon");
+
+        // Retrieve mute state from localStorage
+        let isMuted = localStorage.getItem("isMuted") === "true";
+        soundIcon.src = isMuted ? "mute.png" : "soundon.png"; // Set correct icon
+
+        function toggleMute() {
+            isMuted = !isMuted;
+            localStorage.setItem("isMuted", isMuted);
+            soundIcon.src = isMuted ? "mute.png" : "soundon.png";
+
+            // Send message to iframe to toggle mute
+            const audioIframe = document.getElementById("audio-iframe");
+            audioIframe.contentWindow.postMessage("toggleMute", "*");
+        }
+
+        muteButton.addEventListener("click", toggleMute);
+
+
+        // Get all the clickable sectors
+        const sectors = document.querySelectorAll('.sector, .down .instagram, .down .contact, .down .spotify');
+
+        // Get the hover text container
+        const hoverText = document.getElementById('hover-text');
+
+        // Add hover effect to each sector
+        sectors.forEach((sector) => {
+            sector.addEventListener('mouseenter', () => {
+                let text = '';
+
+                // Define the text for each sector
+                if (sector.classList.contains('events')) {
+                    text = 'Future and past events';
+                } else if (sector.classList.contains('community')) {
+                    text = 'About us and community info<br>our visions and<br>join us form';
+                } else if (sector.classList.contains('instagram')) {
+                    text = 'Follow us to stay tuned';
+                } else if (sector.classList.contains('spotify')) {
+                    text = 'Our most iconic tracks from<br>past events and<br>tracks we admire';
+                } else if (sector.classList.contains('contact')) {
+                    text = 'Contact us in any subject';
+                } else {
+                    text = 'Fill me later';
+                }
+
+                // Hide old text instantly by setting opacity to 0
+                hoverText.style.opacity = 0;
+
+                // Immediately update the text content of hover-text
+                hoverText.innerHTML = text;
+
+                // Fade in the new text
+                setTimeout(() => {
+                    hoverText.style.opacity = 1; // Fade in new text
+                }, 10); // A small delay to trigger the fade-in effect
+            });
+
+            // Hide the text when mouse leaves the sector
+            sector.addEventListener('mouseleave', () => {
+                hoverText.style.opacity = 0;  // Fade out the text immediately
+            });
+        });
+    </script>
+
+</body>
+</html>
