@@ -77,6 +77,11 @@ html, body {
         padding: 0 10px;
     }
 
+    .quote-container {
+        position: relative;
+        top: -24px; /* Move the quote container up */
+    }
+
     .sub-title {
         font-size: 1.1rem;
         text-align: center;
