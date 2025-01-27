@@ -50,19 +50,21 @@
     <div id="hover-text"></div>
 
     <script>
+        // Mobile video autoplay logic
         document.addEventListener("DOMContentLoaded", function () {
             const video = document.getElementById("background-video");
-
-            // Check if the video has been played in this session
-            if (!sessionStorage.getItem("videoPlayed")) {
-                // Video has not been played yet, so play it
-                video.play();
-
-                // Mark the video as played in sessionStorage
-                sessionStorage.setItem("videoPlayed", "true");
-            } else {
-                // Video has already been played, so just pause it
-                video.pause();
+    
+            // Function to handle mobile autoplay
+            function playVideoOnClick() {
+                video.play().catch((error) => {
+                    console.log("Autoplay blocked. Waiting for user interaction.");
+                    document.addEventListener("click", () => video.play(), { once: true });
+                });
+            }
+    
+            // Trigger video play on user click to handle mobile restrictions
+            if (window.innerWidth <= 767) {
+                document.addEventListener("click", playVideoOnClick, { once: true });
             }
         });
 
