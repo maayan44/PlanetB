@@ -1,0 +1,181 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden; /* Prevent scrollbars */
+    background-size: 400% 400%;
+    position: relative; /* For absolute positioning of waves */
+    font-family: "Montserrat", serif;
+}
+
+/* Main container (Big rectangle with 7 sectors) */
+.frame {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 40% 1fr 1fr 1fr;
+    width: 20%;
+    height: 60%;
+    margin: 10% auto;
+    border: 2px solid black;
+}
+
+/* Main sector (Logo) */
+.main-sector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    border: 2px solid black;
+}
+
+.main-sector .logo {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* Clickable sectors (Links) */
+.sector a {
+    text-decoration: none; /* Remove underline */
+    color: black; /* Set text color to black */
+    font-size: 24px; /* Ensure font size is consistent */
+    font-weight: bold; /* Make text bold */
+    border: 2px solid black; /* Add border */
+    transition: background-color 0.3s ease; /* Smooth transition */
+    display: flex; /* Align text with flexbox */
+    justify-content: center; /* Center text horizontally */
+    align-items: center; /* Center text vertically */
+    height: 100%; /* Make the link take up the full height */
+    width: 100%; /* Make the link take up the full width */
+    letter-spacing: 2px;
+}
+
+.sector a:hover {
+    background-color: rgba(0, 0, 0, 0.1); /* Optional: change background on hover */
+}
+
+/* Instagram sector */
+.down {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%; /* Divide into 4 equal parts */
+    width: 100%;
+    height: 100%;
+}
+
+/* Instagram Rectangle */
+.down .instagram {
+    background: transparent;
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    letter-spacing: 2px;
+}
+
+.down .instagram:hover,
+.down .mute:hover,
+.down .contact:hover,
+.down .spotify:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Contact, Mute, and Spotify Squares */
+.down .contact, .down .mute, .down .spotify {
+    background: transparent;
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Mute Square Image */
+.down .mute img, .down .spotify img, .down .instagram img {
+    width: 30%;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.down .contact img {
+    width: 30%;  /* Adjust image size */
+    height: auto;
+}
+
+#hover-text {
+    position: absolute;
+    top: calc(75% + 60px); /* Adjust distance further below the frame */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.4rem;
+    color: black;
+    opacity: 0;  /* Initially invisible */
+    transition: opacity 4s ease-in-out;  /* Fade in over 4 seconds */
+    font-weight: bold;
+    text-align: center;
+    white-space: normal;  /* Allow text to wrap normally */
+    line-height: 1.5;  /* Space out the lines a little */
+    pointer-events: none; /* Avoid interactions */
+    font-family: 'Arial', sans-serif;
+}
+
+.down a {
+    position: relative;
+    z-index: 1; /* Ensure they stay above the hover text */
+}
+
+
+#background-video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+/* MOBILE VIEW */
+@media (max-width: 767px) {
+    .frame {
+        width: 80%; /* Make the frame wider on mobile */
+        height: 70%; /* Adjust height to fit content */
+        display: grid;
+        grid-template-rows: 35% 1fr 1fr 1fr; /* Adjust proportions */
+        position: absolute;
+        top: 44%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .sector a {
+        font-size: 18px; /* Reduce font size for better fit */
+        letter-spacing: 1px;
+    }
+
+    .down {
+        grid-template-columns: repeat(4, 1fr); /* Ensure 4 equal sections */
+    }
+
+    .down a img {
+        width: 40%; /* Slightly larger icons for better visibility */
+    }
+
+    #hover-text {
+        top: calc(85% + 20px); /* Adjust position below the frame */
+        font-size: 1rem;
+    }
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Audio</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        audio {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="background-audio" autoplay loop>
+        <source src="aera.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <script>
+        const audio = document.getElementById("background-audio");
+    
+        // Retrieve stored audio time
+        let savedTime = localStorage.getItem("audioTime");
+        if (savedTime) {
+            audio.currentTime = parseFloat(savedTime);
+        }
+    
+        // Save the current audio time every second
+        audio.addEventListener("timeupdate", () => {
+            localStorage.setItem("audioTime", audio.currentTime);
+        });
+    
+        // Handle mute message from main page
+        window.addEventListener("message", (event) => {
+            if (event.data === "toggleMute") {
+                audio.muted = !audio.muted;
+                localStorage.setItem("isMuted", audio.muted);
+            }
+        });
+    
+        // Restore mute state
+        let isMuted = localStorage.getItem("isMuted") === "true";
+        audio.muted = isMuted;
+    </script>    
+
+</body>
+</html>

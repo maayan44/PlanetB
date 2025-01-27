@@ -1,0 +1,117 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: auto;
+    background-size: 200% 200%;
+}
+
+.landing {
+    height: 88vh;
+    width: 100%;
+    display: flex;
+    align-items: center; /* Center vertically */
+    flex-direction: column;
+    text-align: center; /* Center text inside the container */
+    padding-top: 5vh;  /* Add space at the top */
+    padding-bottom: 5vh; /* Add space at the bottom */
+}
+
+.go-back-button {
+    margin-top: 16px; /* More space above the button */
+    margin-bottom: 44px; /* Increase space between button and title */
+}
+
+.go-back-button img {
+    width: 100px; /* Adjust the size of the logo */
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.go-back-button img:hover {
+    transform: scale(1.1); /* Slight zoom effect on hover */
+}
+
+.title h1 {
+    font-size: 4rem;
+    color: rgb(31, 29, 29);
+    text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    cursor: default;
+}
+
+.sub-title {
+    font-size: 2rem;
+    color: #383636;
+    margin-top: 10px;
+    cursor: default;
+}
+
+#background-video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+/* GRID */
+.events-grid {
+    max-width: 80vw; /* Adjust width as needed */
+    width: 100%;
+    padding: 0 10vw; /* More padding for centering */
+    margin-bottom: 40px;
+}
+
+.grid-header, .event-row {
+    display: grid;
+    grid-template-columns: 1.5fr 2fr 2fr; /* Date (1/5), Venue (2/5), Location (2/5) */
+    text-align: left;
+    padding: 15px 0;
+    font-size: 2rem;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.3); /* Horizontal line */
+}
+
+.grid-header {
+    font-weight: normal; /* Remove bold */
+    color: #383636; /* Match the event-row text color */
+    border-bottom: 2px solid rgba(0, 0, 0, 0.5); /* Make it same thickness as event rows */
+}
+
+.event-row {
+    color: #383636;
+}
+
+
+/* MOBILE VIEW */
+@media (max-width: 767px) {
+    .title h1 {
+        font-size: 2.8rem;
+    }
+
+    .sub-title {
+        font-size: 1.8rem;
+    }
+
+    .grid-header, .event-row {
+        font-size: 1.4rem;
+        display: grid;
+        grid-template-columns: 1.8fr 1.4fr 2fr; /* Keep the columns consistent */
+        padding: 15px 0;
+        text-align: left;
+        border-bottom: 2px solid rgba(0, 0, 0, 0.3); /* Ensure the grid items have consistent styling */
+    }
+
+    .events-grid {
+        max-width: 94vw; /* Adjust width as needed */
+        width: 100%;
+        padding: 0 2vw; /* Reduced padding for better alignment */
+        margin-bottom: 64px;
+    }
+}
