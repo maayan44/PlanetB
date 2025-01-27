@@ -32,30 +32,42 @@
 
     <script>
         const audio = document.getElementById("background-audio");
-
+    
         if (!sessionStorage.getItem("audioPlayed")) {
             sessionStorage.setItem("audioPlayed", "true");
         } else {
             audio.volume = 0;
         }
-
+    
         audio.volume = 0.64;
-
+    
         function navigate() {
             window.location.href = 'mainpage.html';
         }
-
+    
         audio.onended = function() {
             audio.pause();
             audio.currentTime = 0;
         };
-
+    
+        // Mobile video autoplay logic
         document.addEventListener("DOMContentLoaded", function () {
             const video = document.getElementById("background-video");
-
-            video.play().catch((error) => {
-                console.log("Autoplay blocked. Waiting for user interaction.");
-                document.addEventListener("click", () => video.play(), { once: true });
+    
+            // Function to handle mobile autoplay
+            function playVideoOnClick() {
+                video.play().catch((error) => {
+                    console.log("Autoplay blocked. Waiting for user interaction.");
+                    document.addEventListener("click", () => video.play(), { once: true });
+                });
+            }
+    
+            // Trigger video play on user click to handle mobile restrictions
+            if (window.innerWidth <= 767) {
+                document.addEventListener("click", playVideoOnClick, { once: true });
+            }
+        });
     </script>
+    
 </body>
 </html>
