@@ -1,25 +1,23 @@
-/* General reset for box model */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* HTML and Body settings */
 html, body {
     height: 100%;
     margin: 0;
-    overflow: hidden;
+    overflow: auto;
     background-size: 200% 200%;
 }
 
-/* Landing Page Section */
 .landing {
-    height: 100vh; /* Full viewport height */
+    height: 88vh;
     width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    align-items: center; /* Center vertically */
+    flex-direction: column;
+    text-align: center; /* Center text inside the container */
     padding-top: 5vh;  /* Add space at the top */
     padding-bottom: 5vh; /* Add space at the bottom */
 }
@@ -119,7 +117,7 @@ input[type="email"], input[type="text"], textarea {
 }
 
 .go-back-button {
-    margin-top: -44px; /* More space above the button */
+    margin-top: 16px; /* More space above the button */
     margin-bottom: 44px; /* Increase space between button and title */
 }
 
