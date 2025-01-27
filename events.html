@@ -8,10 +8,10 @@
 </head>
 <body>
 
-    <video autoplay muted loop id="background-video">
+    <video autoplay muted loop playsinline preload="auto" id="background-video">
         <source src="irivid.mp4" type="video/mp4">
         Your browser does not support the video tag.
-    </video>
+    </video> 
 
     <iframe id="audio-iframe" src="audio.html" style="display: none;"></iframe>
 
@@ -78,26 +78,6 @@
             </div>
         </div>
     </div>
-
-    <script>
-        // Mobile video autoplay logic
-        document.addEventListener("DOMContentLoaded", function () {
-            const video = document.getElementById("background-video");
-    
-            // Function to handle mobile autoplay
-            function playVideoOnClick() {
-                video.play().catch((error) => {
-                    console.log("Autoplay blocked. Waiting for user interaction.");
-                    document.addEventListener("click", () => video.play(), { once: true });
-                });
-            }
-    
-            // Trigger video play on user click to handle mobile restrictions
-            if (window.innerWidth <= 767) {
-                document.addEventListener("click", playVideoOnClick, { once: true });
-            }
-        });
-    </script>
     
 </body>
 </html>
