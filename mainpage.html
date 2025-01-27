@@ -50,6 +50,22 @@
     <div id="hover-text"></div>
 
     <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const video = document.getElementById("background-video");
+
+            // Check if the video has been played in this session
+            if (!sessionStorage.getItem("videoPlayed")) {
+                // Video has not been played yet, so play it
+                video.play();
+
+                // Mark the video as played in sessionStorage
+                sessionStorage.setItem("videoPlayed", "true");
+            } else {
+                // Video has already been played, so just pause it
+                video.pause();
+            }
+        });
+
         // Get the audio iframe and the mute button
         const muteButton = document.getElementById("mute-button");
         const soundIcon = document.getElementById("sound-icon");
