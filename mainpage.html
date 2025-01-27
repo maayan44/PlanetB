@@ -50,38 +50,55 @@
     <div id="hover-text"></div>
 
     <script>
-        // Get the audio iframe and the mute button
+        // Mobile video autoplay logic
+        document.addEventListener("DOMContentLoaded", function () {
+            const video = document.getElementById("background-video");
+    
+            // Function to handle mobile autoplay
+            function playVideoOnClick() {
+                video.play().catch((error) => {
+                    console.log("Autoplay blocked. Waiting for user interaction.");
+                    document.addEventListener("click", () => video.play(), { once: true });
+                });
+            }
+    
+            // Trigger video play on user click to handle mobile restrictions
+            if (window.innerWidth <= 767) {
+                document.addEventListener("click", playVideoOnClick, { once: true });
+            }
+        });
+    
+        // Mute functionality for the audio iframe
         const muteButton = document.getElementById("mute-button");
         const soundIcon = document.getElementById("sound-icon");
-
+    
         // Retrieve mute state from localStorage
         let isMuted = localStorage.getItem("isMuted") === "true";
         soundIcon.src = isMuted ? "mute.png" : "soundon.png"; // Set correct icon
-
+    
         function toggleMute() {
             isMuted = !isMuted;
             localStorage.setItem("isMuted", isMuted);
             soundIcon.src = isMuted ? "mute.png" : "soundon.png";
-
+    
             // Send message to iframe to toggle mute
             const audioIframe = document.getElementById("audio-iframe");
             audioIframe.contentWindow.postMessage("toggleMute", "*");
         }
-
+    
         muteButton.addEventListener("click", toggleMute);
-
-
+    
         // Get all the clickable sectors
         const sectors = document.querySelectorAll('.sector, .down .instagram, .down .contact, .down .spotify');
-
+    
         // Get the hover text container
         const hoverText = document.getElementById('hover-text');
-
+    
         // Add hover effect to each sector
         sectors.forEach((sector) => {
             sector.addEventListener('mouseenter', () => {
                 let text = '';
-
+    
                 // Define the text for each sector
                 if (sector.classList.contains('events')) {
                     text = 'Future and past events';
@@ -96,25 +113,26 @@
                 } else {
                     text = 'Fill me later';
                 }
-
+    
                 // Hide old text instantly by setting opacity to 0
                 hoverText.style.opacity = 0;
-
+    
                 // Immediately update the text content of hover-text
                 hoverText.innerHTML = text;
-
+    
                 // Fade in the new text
                 setTimeout(() => {
                     hoverText.style.opacity = 1; // Fade in new text
                 }, 10); // A small delay to trigger the fade-in effect
             });
-
+    
             // Hide the text when mouse leaves the sector
             sector.addEventListener('mouseleave', () => {
                 hoverText.style.opacity = 0;  // Fade out the text immediately
             });
         });
     </script>
+    
 
 </body>
 </html>

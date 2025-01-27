@@ -41,5 +41,26 @@
             </p>
         </div>
     </div>
+
+    <script>
+        // Mobile video autoplay logic
+        document.addEventListener("DOMContentLoaded", function () {
+            const video = document.getElementById("background-video");
+    
+            // Function to handle mobile autoplay
+            function playVideoOnClick() {
+                video.play().catch((error) => {
+                    console.log("Autoplay blocked. Waiting for user interaction.");
+                    document.addEventListener("click", () => video.play(), { once: true });
+                });
+            }
+    
+            // Trigger video play on user click to handle mobile restrictions
+            if (window.innerWidth <= 767) {
+                document.addEventListener("click", playVideoOnClick, { once: true });
+            }
+        });
+    </script>
+    
 </body>
 </html>
