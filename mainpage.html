@@ -71,49 +71,52 @@
         muteButton.addEventListener("click", toggleMute);
 
 
-        // Get all the clickable sectors
-        const sectors = document.querySelectorAll('.sector, .down .instagram, .down .contact, .down .spotify');
+        // Check if the device is mobile (max-width 767px)
+        if (window.innerWidth > 767) {
+            // Get all the clickable sectors
+            const sectors = document.querySelectorAll('.sector, .down .instagram, .down .contact, .down .spotify');
 
-        // Get the hover text container
-        const hoverText = document.getElementById('hover-text');
+            // Get the hover text container
+            const hoverText = document.getElementById('hover-text');
 
-        // Add hover effect to each sector
-        sectors.forEach((sector) => {
-            sector.addEventListener('mouseenter', () => {
-                let text = '';
+            // Add hover effect to each sector
+            sectors.forEach((sector) => {
+                sector.addEventListener('mouseenter', () => {
+                    let text = '';
 
-                // Define the text for each sector
-                if (sector.classList.contains('events')) {
-                    text = 'Future and past events';
-                } else if (sector.classList.contains('community')) {
-                    text = 'About us and community info<br>our visions and<br>join us form';
-                } else if (sector.classList.contains('instagram')) {
-                    text = 'Follow us to stay tuned';
-                } else if (sector.classList.contains('spotify')) {
-                    text = 'Our most iconic tracks from<br>past events and<br>tracks we admire';
-                } else if (sector.classList.contains('contact')) {
-                    text = 'Contact us in any subject';
-                } else {
-                    text = 'Fill me later';
-                }
+                    // Define the text for each sector
+                    if (sector.classList.contains('events')) {
+                        text = 'Future and past events';
+                    } else if (sector.classList.contains('community')) {
+                        text = 'About us and community info<br>our visions and<br>join us form';
+                    } else if (sector.classList.contains('instagram')) {
+                        text = 'Follow us to stay tuned';
+                    } else if (sector.classList.contains('spotify')) {
+                        text = 'Our most iconic tracks from<br>past events and<br>tracks we admire';
+                    } else if (sector.classList.contains('contact')) {
+                        text = 'Contact us in any subject';
+                    } else {
+                        text = 'Fill me later';
+                    }
 
-                // Hide old text instantly by setting opacity to 0
-                hoverText.style.opacity = 0;
+                    // Hide old text instantly by setting opacity to 0
+                    hoverText.style.opacity = 0;
 
-                // Immediately update the text content of hover-text
-                hoverText.innerHTML = text;
+                    // Immediately update the text content of hover-text
+                    hoverText.innerHTML = text;
 
-                // Fade in the new text
-                setTimeout(() => {
-                    hoverText.style.opacity = 1; // Fade in new text
-                }, 10); // A small delay to trigger the fade-in effect
+                    // Fade in the new text
+                    setTimeout(() => {
+                        hoverText.style.opacity = 1; // Fade in new text
+                    }, 10); // A small delay to trigger the fade-in effect
+                });
+
+                // Hide the text when mouse leaves the sector
+                sector.addEventListener('mouseleave', () => {
+                    hoverText.style.opacity = 0;  // Fade out the text immediately
+                });
             });
-
-            // Hide the text when mouse leaves the sector
-            sector.addEventListener('mouseleave', () => {
-                hoverText.style.opacity = 0;  // Fade out the text immediately
-            });
-        });
+        }
     </script>
 
 </body>
