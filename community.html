@@ -43,24 +43,28 @@
     </div>
 
     <script>
-        // Mobile video autoplay logic
-        document.addEventListener("DOMContentLoaded", function () {
+        // Function to handle video playback based on the device's screen size and user interaction.
+        function handleMobileVideoAutoplay() {
             const video = document.getElementById("background-video");
     
-            // Function to handle mobile autoplay
-            function playVideoOnClick() {
-                video.play().catch((error) => {
-                    console.log("Autoplay blocked. Waiting for user interaction.");
-                    document.addEventListener("click", () => video.play(), { once: true });
+            // Ensure video is not autoplaying on page load by checking if it's mobile.
+            if (window.innerWidth <= 767) {
+                video.pause();  // Make sure video is paused on load.
+    
+                // Add event listener to play video on user click.
+                document.addEventListener("click", function playVideoOnClick() {
+                    video.play().catch((error) => {
+                        console.log("Autoplay blocked. Waiting for user interaction.");
+                        document.addEventListener("click", () => video.play(), { once: true });
+                    });
+                    // Remove the listener once the video is played to avoid multiple triggers.
+                    document.removeEventListener("click", playVideoOnClick);
                 });
             }
+        }
     
-            // Trigger video play on user click to handle mobile restrictions
-            if (window.innerWidth <= 767) {
-                document.addEventListener("click", playVideoOnClick, { once: true });
-            }
-        });
-    </script>
+        document.addEventListener("DOMContentLoaded", handleMobileVideoAutoplay);
+    </script>    
     
 </body>
 </html>
